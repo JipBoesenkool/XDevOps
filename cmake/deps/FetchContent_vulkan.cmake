@@ -19,6 +19,18 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(VulkanHeaders) # vulkanheaders has a proper CMakeLists
 
 #-------------------------------------------------------------------------
+# Fetch Vulkan bootstrap
+# ------------------------------------------------------------------------
+FetchContent_Declare(
+  vk-bootstrap
+  GIT_REPOSITORY https://github.com/charles-lunarg/vk-bootstrap.git
+  GIT_TAG v${VULKAN_VERSION}
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
+)
+FetchContent_MakeAvailable(vk-bootstrap)
+
+#-------------------------------------------------------------------------
 # Fetch Vulkan vma
 # ------------------------------------------------------------------------
 FetchContent_Declare(
