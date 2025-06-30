@@ -1,0 +1,6 @@
+################################################################################
+# Descriptions: This file will get pulled in by the main CMakeLists.txt file,
+# By listing the configurable options in this file a user does not need to dig through the cmake files.
+################################################################################
+#option(BUILD_STATIC_LIBS "Build the static library" ON)
+#option(BUILD_SHARED_LIBS "Build using shared libraries" ON)

@@ -1,0 +1,35 @@
+################################################################################
+# Function: function(DetectPlatform out_platform_name)
+# Description: Detects which platform we are building for (not which platform it is build on!) and get a string
+# Source: https://github.com/libsdl-org/SDL/blob/main/cmake/sdlplatform.cmake  
+################################################################################
+function(DetectPlatform out_platform_name)
+  set(cmake_platform)
+  if(WIN32)
+    set(cmake_platform Windows)
+  elseif(APPLE)
+    if(CMAKE_SYSTEM_NAME MATCHES ".*(Darwin|MacOS).*")
+      set(cmake_platform macOS)
+    elseif(CMAKE_SYSTEM_NAME MATCHES ".*iOS.*")
+      set(cmake_platform iOS)
+    else()
+      message(WARNING "Unknown Apple platform: \"${CMAKE_SYSTEM_NAME}\"")
+    endif()
+  elseif(CMAKE_SYSTEM_NAME MATCHES ".*Linux")
+    set(cmake_platform Linux)
+  elseif(CMAKE_SYSTEM_NAME MATCHES "Android.*")
+    set(cmake_platform Android)
+  elseif(CMAKE_SYSTEM_NAME MATCHES "Emscripten.*")
+    set(cmake_platform Emscripten)
+  endif()
+
+  if(cmake_platform)
+    string(TOUPPER "${cmake_platform}" _upper_platform)
+    set("${_upper_platform}" TRUE PARENT_SCOPE)
+  else()
+    message(FATAL_ERROR "Platform is not supported!")
+    set(cmake_platform "UNKNOWN")
+  endif()
+
+  set(${out_platform_name} ${cmake_platform} PARENT_SCOPE)
+endfunction()
